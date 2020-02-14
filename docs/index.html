@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <style>
+        /* CSS Document */
+
+		div.aria-widget-slider {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 24px;
+			height: 300px;
+		}
+
+		div.rail {
+			flex: 1;
+		}
+
+		div.rail-label {
+			text-align: center;
+			height: 24px;
+			width: 4em;
+		}
+
+		div.aria-widget-slider .rail {
+			background-color: #eee;
+			border: 1px solid #888;
+			position: relative;
+			height: 4px;
+		}
+
+		div.aria-widget-slider button[role="slider"] {
+			border: none;
+			position: absolute;
+			padding: 0;
+			margin: 0;
+			top: -10px;
+			background-color: red;
+			width: 20px;
+			height: 24px;
+		}
+
+		div.aria-widget-slider button[role="slider"].focus,
+		div.aria-widget-slider button[role="slider"]:hover {
+			outline-color: rgb(140, 203, 242);
+			outline-style: solid;
+			outline-width: 2px;
+			outline-offset: 2px;
+		}
+
+		div.aria-widget-slider .rail.focus {
+			background-color: #aaa;
+		}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+		<div class="row">
+			<div class="col-12 my-5">
+				<h1>
+					<a href="https://github.com/19h47/19h47-slider">
+						Slider<sup class="js-slider-label"></sup>
+					</a>
+				</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+
+				<h3>Range</h3>
+
+				<div class="aria-widget-slider">
+					<div class="rail-label max">
+						0
+					</div>
+					<div class="rail">
+						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="max thumb js-max"
+							aria-valuemin="0" aria-valuenow="250" aria-valuetext="$250" aria-valuemax="400"
+							aria-label="Hotel Maximum Price" aria-orientation="vertical">
+						<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="min thumb js-min"
+							aria-valuemin="0" aria-valuenow="100" aria-valuetext="$100" aria-valuemax="400"
+							aria-label="Hotel Minimum Price" aria-orientation="vertical">
+					</div>
+					<div class="rail-label min">
+						0
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+
+    <script type="text/javascript" src="./main.js"></script>
+    <script>
+		const sliders = [...document.querySelectorAll('[role=slider]')];
+		const $label = document.querySelector('.js-slider-label');
+
+		sliders.map($slider => {
+			const slider = new Slider.default($slider);
+			slider.init();
+
+			slider.on('Slider.change', () => {
+				const { max, min } = $slider.parentElement.dataset;
+
+				$label.innerHTML = min + ' &rarr; ' + max;
+			})
+		});
+
+    </script>
+</body>
+
+</html>
