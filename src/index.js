@@ -11,7 +11,7 @@ import {
 import EventDispatcher from '@/EventDispatcher';
 
 
-const contains = (target, className) => target.classList.contains(className);
+// const contains = (target, className) => target.classList.contains(className);
 
 
 const optionsDefault = {
@@ -35,7 +35,7 @@ class Slider extends EventDispatcher {
 		// Elements
 		this.$rail = this.rootElement.parentNode;
 
-		this.$label = false;
+		// this.$label = false;
 		this.$min = false;
 		this.$max = false;
 
@@ -79,13 +79,13 @@ class Slider extends EventDispatcher {
 
 		this.valueNow = parseInt((this.rootElement.getAttribute('aria-valuenow')), 10);
 
-		if (contains(this.rootElement, 'js-min')) {
-			this.$label = this.rootElement.parentElement.nextElementSibling;
-		}
+		// if (contains(this.rootElement, 'js-min')) {
+		// 	this.$label = this.rootElement.parentElement.nextElementSibling;
+		// }
 
-		if (contains(this.rootElement, 'js-max')) {
-			this.$label = this.rootElement.parentElement.previousElementSibling;
-		}
+		// if (contains(this.rootElement, 'js-max')) {
+		// 	this.$label = this.rootElement.parentElement.previousElementSibling;
+		// }
 
 		this.rootElement.addEventListener('keydown', this.onKeydown);
 		this.rootElement.addEventListener('mousedown', this.drag.bind(this));
@@ -179,7 +179,7 @@ class Slider extends EventDispatcher {
 		this.valueText = value;
 
 		this.rootElement.setAttribute('aria-valuenow', this.valueNow);
-		this.rootElement.setAttribute('aria-valuetext', this.dolValueNow);
+		this.rootElement.setAttribute('aria-valuetext', this.valueText);
 
 		const position = ((this.valueMax - this.valueNow) * (this.railHeight - 2 * (this.thumbHeight - this.railBorderWidth))) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
 
@@ -195,9 +195,9 @@ class Slider extends EventDispatcher {
 			this.rootElement.style.setProperty('top', `${position + this.thumbHeight - this.railBorderWidth}px`);
 		}
 
-		if (this.$label) {
-			this.$label.innerHTML = this.valueText.toString();
-		}
+		// if (this.$label) {
+		// 	this.$label.innerHTML = this.valueText.toString();
+		// }
 
 		this.emit('Slider.change', { now: this.valueNow });
 	}
