@@ -15,7 +15,7 @@
 			flex-direction: column;
 			align-items: center;
 			width: 24px;
-			height: 300px;
+			height: 233px;
 		}
 
 		div.rail {
@@ -40,7 +40,6 @@
 			position: absolute;
 			padding: 0;
 			margin: 0;
-			top: -10px;
 			background-color: red;
 			width: 20px;
 			height: 24px;
@@ -66,30 +65,89 @@
 			<div class="col-12 my-5">
 				<h1>
 					<a href="https://github.com/19h47/slider">
-						Slider<sup class="js-slider-label"></sup>
+						Slider
 					</a>
 				</h1>
 			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-12">
-
-				<h3>Range</h3>
-
+			<div class="col-12 js-slider">
+				<h3>Range<sup class="js-slider-label"></sup></h3>
 				<div class="aria-widget-slider">
 					<div class="rail-label max js-slider-label-max">
-						250
+						35
 					</div>
 					<div class="rail">
 						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="max thumb js-max"
-							aria-valuemin="0" aria-valuenow="250" aria-valuetext="$250" aria-valuemax="400"
+							aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35"
 							aria-label="Hotel Maximum Price" aria-orientation="vertical">
 						<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="min thumb js-min"
-							aria-valuemin="0" aria-valuenow="100" aria-valuetext="$100" aria-valuemax="400"
+							aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
 							aria-label="Hotel Minimum Price" aria-orientation="vertical">
 					</div>
 					<div class="rail-label min js-slider-label-min">
-						100
+						0
+					</div>
+				</div>
+			</div>
+			<div class="col-12 js-slider">
+				<h3>Range<sup class="js-slider-label"></sup></h3>
+				<div class="aria-widget-slider">
+					<div class="rail-label max js-slider-label-max">
+						35
+					</div>
+					<div class="rail">
+						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="max thumb js-max" aria-valuemin="0"
+							aria-valuenow="35" aria-valuetext="35" aria-valuemax="35" aria-label="Hotel Maximum Price"
+							aria-orientation="vertical">
+							<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="min thumb js-min"
+								aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
+								aria-label="Hotel Minimum Price" aria-orientation="vertical">
+					</div>
+					<div class="rail-label min js-slider-label-min">
+						0
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12 js-slider">
+				<h3>Range<sup class="js-slider-label"></sup></h3>
+				<div class="aria-widget-slider">
+					<div class="rail-label max js-slider-label-max">
+						35
+					</div>
+					<div class="rail">
+						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="max thumb js-max"
+							aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35"
+							aria-label="Hotel Maximum Price" aria-orientation="vertical">
+							<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="min thumb js-min"
+								aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
+								aria-label="Hotel Minimum Price" aria-orientation="vertical">
+					</div>
+					<div class="rail-label min js-slider-label-min">
+						0
+					</div>
+				</div>
+			</div>
+			<div class="col-12 js-slider">
+				<h3>Range<sup class="js-slider-label"></sup></h3>
+				<div class="aria-widget-slider">
+					<div class="rail-label max js-slider-label-max">
+						35
+					</div>
+					<div class="rail">
+						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="max thumb js-max"
+							aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35"
+							aria-label="Hotel Maximum Price" aria-orientation="vertical">
+							<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="min thumb js-min"
+								aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
+								aria-label="Hotel Minimum Price" aria-orientation="vertical">
+					</div>
+					<div class="rail-label min js-slider-label-min">
+						0
 					</div>
 				</div>
 			</div>
@@ -99,22 +157,26 @@
 
     <script type="text/javascript" src="./main.js"></script>
     <script>
-		const sliders = [...document.querySelectorAll('[role=slider]')];
-		const $label = document.querySelector('.js-slider-label');
-		const $labelMin = document.querySelector('.js-slider-label-min');
-		const $labelMax = document.querySelector('.js-slider-label-max');
+		const sliders = [...document.querySelectorAll('.js-slider')];
 
 		sliders.map($slider => {
-			const slider = new Slider.default($slider);
-			slider.init();
+			const thumbs = [...$slider.querySelectorAll('[role=slider]')];
+			const $label = $slider.querySelector('.js-slider-label');
+			const $labelMin = $slider.querySelector('.js-slider-label-min');
+			const $labelMax = $slider.querySelector('.js-slider-label-max');
 
-			slider.on('Slider.change', () => {
-				const { max, min } = $slider.parentElement.dataset;
+			thumbs.map($thumb => {
+				const thumb = new Slider.default($thumb);
+				thumb.init();
 
-				$label.innerHTML = min + ' &rarr; ' + max;
-				$labelMin.innerHTML = min;
-				$labelMax.innerHTML = max;
-			})
+				thumb.on('Slider.change', () => {
+					const { max, min } = $thumb.parentElement.dataset;
+
+					$label.innerHTML = min + ' &rarr; ' + max;
+					$labelMin.innerHTML = min;
+					$labelMax.innerHTML = max;
+				})
+			});
 		});
 
     </script>

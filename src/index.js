@@ -11,9 +11,6 @@ import {
 import EventDispatcher from '@/EventDispatcher';
 
 
-// const contains = (target, className) => target.classList.contains(className);
-
-
 const optionsDefault = {
 	valueNow: 50,
 	valueText: 50,
@@ -45,11 +42,10 @@ class Slider extends EventDispatcher {
 		this.valueMax = this.options.valueMax;
 
 		// Rail
-		this.railRect = this.$rail.getBoundingClientRect();
-		this.railWidth = parseInt(this.railRect.width, 10);
-		this.railHeight = parseInt(this.railRect.height, 10);
-		this.railLeft = parseInt(this.railRect.left, 10);
-		this.railTop = parseInt(this.railRect.top, 10);
+		this.railRect = null;
+		this.railWidth = 0;
+		this.railHeight = 0;
+		this.railLeft = 0;
 		this.railBorderWidth = 0;
 
 		this.thumbWidth = this.options.thumbWidth;
@@ -57,6 +53,7 @@ class Slider extends EventDispatcher {
 
 		// Bind
 		this.onKeydown = this.onKeydown.bind(this);
+		this.onResize = this.onResize.bind(this);
 	}
 
 
@@ -79,13 +76,14 @@ class Slider extends EventDispatcher {
 
 		this.valueNow = parseInt((this.rootElement.getAttribute('aria-valuenow')), 10);
 
-		// if (contains(this.rootElement, 'js-min')) {
-		// 	this.$label = this.rootElement.parentElement.nextElementSibling;
-		// }
+		this.onResize();
+		this.initEvents();
+		this.moveSliderTo(this.valueNow);
+	}
 
-		// if (contains(this.rootElement, 'js-max')) {
-		// 	this.$label = this.rootElement.parentElement.previousElementSibling;
-		// }
+
+	initEvents() {
+		window.addEventListener('resize', this.onResize);
 
 		this.rootElement.addEventListener('keydown', this.onKeydown);
 		this.rootElement.addEventListener('mousedown', this.drag.bind(this));
@@ -93,8 +91,6 @@ class Slider extends EventDispatcher {
 		this.rootElement.addEventListener('blur', this.handleBlur.bind(this));
 
 		this.rootElement.addEventListener('touchstart', this.drag.bind(this), { passive: false });
-
-		this.moveSliderTo(this.valueNow);
 	}
 
 
@@ -125,8 +121,7 @@ class Slider extends EventDispatcher {
 
 	drag(event) {
 		const handleMouseMove = e => {
-			// const diffX = e.pageX - this.railLeft;
-			const diffY = (e.touches ? e.touches[0].pageY : e.pageY) - this.railTop;
+			const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - this.$rail.getBoundingClientRect().top; // eslint-disable-line max-len
 
 			this.valueNow = this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / this.railHeight, 10); // eslint-disable-line max-len
 
@@ -146,10 +141,7 @@ class Slider extends EventDispatcher {
 			document.removeEventListener('touchend', handleMouseUp, { passive: true });
 		};
 
-		// bind a mousemove event handler to move pointer
 		document.addEventListener('mousemove', handleMouseMove);
-
-		// bind a mouseup event handler to stop tracking mouse movements
 		document.addEventListener('mouseup', handleMouseUp);
 
 		document.addEventListener('touchmove', handleMouseMove, false);
@@ -179,25 +171,25 @@ class Slider extends EventDispatcher {
 		this.valueText = value;
 
 		this.rootElement.setAttribute('aria-valuenow', this.valueNow);
-		this.rootElement.setAttribute('aria-valuetext', this.valueText);
+		this.rootElement.setAttribute('aria-valuetext', this.dolValueNow);
 
-		const position = ((this.valueMax - this.valueNow) * (this.railHeight - 2 * (this.thumbHeight - this.railBorderWidth))) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
+		const position = Math.round((this.valueMax - this.valueNow) * (this.railHeight - 2 * (this.thumbHeight - this.railBorderWidth))) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
 
 		if (this.$min) {
 			this.$min.setAttribute('aria-valuemax', this.valueNow);
 			this.$rail.setAttribute('data-max', this.valueNow);
-			this.rootElement.style.setProperty('top', `${position}px`);
+			this.rootElement.style.setProperty('transform', `translate3d( 0, ${Math.round(position)}px, 0 )`);
 		}
 
 		if (this.$max) {
 			this.$max.setAttribute('aria-valuemin', this.valueNow);
 			this.$rail.setAttribute('data-min', this.valueNow);
-			this.rootElement.style.setProperty('top', `${position + this.thumbHeight - this.railBorderWidth}px`);
+			this.rootElement.style.setProperty('transform', `translate3d( 0, ${Math.round(position + this.thumbHeight - this.railBorderWidth)}px, 0 )`);
 		}
 
-		// if (this.$label) {
-		// 	this.$label.innerHTML = this.valueText.toString();
-		// }
+		if (this.$label) {
+			this.$label.innerHTML = this.valueText.toString();
+		}
 
 		this.emit('Slider.change', { now: this.valueNow });
 	}
@@ -210,6 +202,15 @@ class Slider extends EventDispatcher {
 	handleBlur() {
 		this.rootElement.classList.remove('focus');
 		this.$rail.classList.remove('focus');
+	}
+
+	onResize() {
+		console.log('onResize');
+		this.railRect = this.$rail.getBoundingClientRect();
+		this.railWidth = parseInt(this.railRect.width, 10);
+		this.railHeight = parseInt(this.railRect.height, 10);
+		this.railLeft = parseInt(this.railRect.left, 10);
+		this.railBorderWidth = 0;
 	}
 }
 
