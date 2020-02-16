@@ -14,11 +14,23 @@ import EventDispatcher from '@/EventDispatcher';
 const contains = (target, className) => target.classList.contains(className);
 
 
+const optionsDefault = {
+	valueNow: 50,
+	valueText: 50,
+	valueMin: 0,
+	valueMax: 100,
+	thumbWidth: 20,
+	thumbHeight: 24,
+};
+
+
 class Slider extends EventDispatcher {
-	constructor(element) {
+	constructor(element, options = {}) {
 		super(['Slider.change']);
 
 		this.rootElement = element;
+
+		this.options = Object.assign({}, optionsDefault, options);
 
 		// Elements
 		this.$rail = this.rootElement.parentNode;
@@ -27,10 +39,10 @@ class Slider extends EventDispatcher {
 		this.$min = false;
 		this.$max = false;
 
-		this.valueNow = 50;
-		this.valueText = 50;
-		this.valueMin = 0;
-		this.valueMax = 100;
+		this.valueNow = this.options.valueNow;
+		this.valueText = this.options.valueText;
+		this.valueMin = this.options.valueMin;
+		this.valueMax = this.options.valueMax;
 
 		// Rail
 		this.railRect = this.$rail.getBoundingClientRect();
@@ -40,8 +52,8 @@ class Slider extends EventDispatcher {
 		this.railTop = parseInt(this.railRect.top, 10);
 		this.railBorderWidth = 0;
 
-		this.thumbWidth = 20;
-		this.thumbHeight = 24;
+		this.thumbWidth = this.options.thumbWidth;
+		this.thumbHeight = this.options.thumbHeight;
 
 		// Bind
 		this.onKeydown = this.onKeydown.bind(this);
