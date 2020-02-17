@@ -16,9 +16,12 @@ const optionsDefault = {
 	valueText: 50,
 	valueMin: 0,
 	valueMax: 100,
-	thumbWidth: 20,
+	thumbWidth: 24,
 	thumbHeight: 24,
 };
+
+const blur = target => target.classList.remove('focus');
+const focus = target => target.classList.add('focus');
 
 
 class Slider extends EventDispatcher {
@@ -176,13 +179,13 @@ class Slider extends EventDispatcher {
 		if (this.$min) {
 			this.$min.setAttribute('aria-valuemax', this.valueNow);
 			this.$rail.setAttribute('data-max', this.valueNow);
-			this.rootElement.style.setProperty('top', `${(position * 100) / this.railRect.height}%`);
+			this.rootElement.style.setProperty('transform', `translate3d( 0, ${position}px, 0 )`);
 		}
 
 		if (this.$max) {
 			this.$max.setAttribute('aria-valuemin', this.valueNow);
 			this.$rail.setAttribute('data-min', this.valueNow);
-			this.rootElement.style.setProperty('top', `calc( ${(position * 100) / this.railRect.height}% + ${this.thumbHeight - this.railBorderWidth}px )`);
+			this.rootElement.style.setProperty('transform', `translate3d( 0, calc( ${position}px + ${this.thumbHeight - this.railBorderWidth}px ), 0 )`);
 		}
 
 		if (this.$label) {
@@ -193,13 +196,13 @@ class Slider extends EventDispatcher {
 	}
 
 	handleFocus() {
-		this.rootElement.classList.add('focus');
-		this.$rail.classList.add('focus');
+		focus(this.rootElement);
+		focus(this.$rail);
 	}
 
 	handleBlur() {
-		this.rootElement.classList.remove('focus');
-		this.$rail.classList.remove('focus');
+		blur(this.rootElement);
+		blur(this.$rail);
 	}
 }
 
