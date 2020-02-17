@@ -42,10 +42,9 @@ class Slider extends EventDispatcher {
 		this.valueMax = this.options.valueMax;
 
 		// Rail
-		this.railRect = null;
-		this.railWidth = 0;
-		this.railHeight = 0;
-		this.railLeft = 0;
+		this.railRect = this.$rail.getBoundingClientRect();
+		this.railWidth = parseInt(this.railRect.width, 10);
+		this.railLeft = parseInt(this.railRect.left, 10);
 		this.railBorderWidth = 0;
 
 		this.thumbWidth = this.options.thumbWidth;
@@ -53,7 +52,6 @@ class Slider extends EventDispatcher {
 
 		// Bind
 		this.onKeydown = this.onKeydown.bind(this);
-		this.onResize = this.onResize.bind(this);
 	}
 
 
@@ -76,15 +74,12 @@ class Slider extends EventDispatcher {
 
 		this.valueNow = parseInt((this.rootElement.getAttribute('aria-valuenow')), 10);
 
-		this.onResize();
 		this.initEvents();
 		this.moveSliderTo(this.valueNow);
 	}
 
 
 	initEvents() {
-		window.addEventListener('resize', this.onResize);
-
 		this.rootElement.addEventListener('keydown', this.onKeydown);
 		this.rootElement.addEventListener('mousedown', this.drag.bind(this));
 		this.rootElement.addEventListener('focus', this.handleFocus.bind(this));
@@ -120,10 +115,12 @@ class Slider extends EventDispatcher {
 	}
 
 	drag(event) {
-		const handleMouseMove = e => {
-			const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - this.$rail.getBoundingClientRect().top; // eslint-disable-line max-len
+		const railRect = this.$rail.getBoundingClientRect();
 
-			this.valueNow = this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / this.railHeight, 10); // eslint-disable-line max-len
+		const handleMouseMove = e => {
+			const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - railRect.top; // eslint-disable-line max-len
+
+			this.valueNow = this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / railRect.height, 10); // eslint-disable-line max-len
 
 			this.moveSliderTo(this.valueNow);
 
@@ -158,6 +155,7 @@ class Slider extends EventDispatcher {
 	moveSliderTo(value) {
 		const valueMax = parseInt(this.rootElement.getAttribute('aria-valuemax'), 10);
 		const valueMin = parseInt(this.rootElement.getAttribute('aria-valuemin'), 10);
+		const railRect = this.$rail.getBoundingClientRect();
 
 		if (value > valueMax) {
 			value = valueMax; // eslint-disable-line no-param-reassign
@@ -173,18 +171,18 @@ class Slider extends EventDispatcher {
 		this.rootElement.setAttribute('aria-valuenow', this.valueNow);
 		this.rootElement.setAttribute('aria-valuetext', this.dolValueNow);
 
-		const position = Math.round((this.valueMax - this.valueNow) * (this.railHeight - 2 * (this.thumbHeight - this.railBorderWidth))) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
+		const position = Math.round((this.valueMax - this.valueNow) * (railRect.height - 2 * (this.thumbHeight - this.railBorderWidth))) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
 
 		if (this.$min) {
 			this.$min.setAttribute('aria-valuemax', this.valueNow);
 			this.$rail.setAttribute('data-max', this.valueNow);
-			this.rootElement.style.setProperty('transform', `translate3d( 0, ${Math.round(position)}px, 0 )`);
+			this.rootElement.style.setProperty('top', `${(position * 100) / this.railRect.height}%`);
 		}
 
 		if (this.$max) {
 			this.$max.setAttribute('aria-valuemin', this.valueNow);
 			this.$rail.setAttribute('data-min', this.valueNow);
-			this.rootElement.style.setProperty('transform', `translate3d( 0, ${Math.round(position + this.thumbHeight - this.railBorderWidth)}px, 0 )`);
+			this.rootElement.style.setProperty('top', `calc( ${(position * 100) / this.railRect.height}% + ${this.thumbHeight - this.railBorderWidth}px )`);
 		}
 
 		if (this.$label) {
@@ -202,15 +200,6 @@ class Slider extends EventDispatcher {
 	handleBlur() {
 		this.rootElement.classList.remove('focus');
 		this.$rail.classList.remove('focus');
-	}
-
-	onResize() {
-		console.log('onResize');
-		this.railRect = this.$rail.getBoundingClientRect();
-		this.railWidth = parseInt(this.railRect.width, 10);
-		this.railHeight = parseInt(this.railRect.height, 10);
-		this.railLeft = parseInt(this.railRect.left, 10);
-		this.railBorderWidth = 0;
 	}
 }
 

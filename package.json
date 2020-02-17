@@ -1,6 +1,6 @@
 {
 	"name": "@19h47/slider",
-	"version": "0.0.7",
+	"version": "0.0.10",
 	"description": "Rail",
 	"main": "dist/main.js",
 	"scripts": {
