@@ -1,4 +1,4 @@
-# @19h47/19h47-slider
+# @19h47/slider
 
 ## Usage
 
