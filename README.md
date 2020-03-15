@@ -1,4 +1,4 @@
-# @19h47/rail
+# @19h47/slider
 
 ## Usage
 
