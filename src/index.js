@@ -30,7 +30,7 @@ class Slider extends EventDispatcher {
 
 		this.rootElement = element;
 
-		this.options = Object.assign({}, optionsDefault, options);
+		this.options = { ...optionsDefault, ...options };
 
 		// Elements
 		this.$rail = this.rootElement.parentNode;
