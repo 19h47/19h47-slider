@@ -44,12 +44,6 @@ class Slider extends EventDispatcher {
 		this.valueMin = this.options.valueMin;
 		this.valueMax = this.options.valueMax;
 
-		// Rail
-		this.railRect = this.$rail.getBoundingClientRect();
-		this.railWidth = parseInt(this.railRect.width, 10);
-		this.railLeft = parseInt(this.railRect.left, 10);
-		this.railBorderWidth = 0;
-
 		this.thumbWidth = this.options.thumbWidth;
 		this.thumbHeight = this.options.thumbHeight;
 
@@ -174,7 +168,7 @@ class Slider extends EventDispatcher {
 		this.rootElement.setAttribute('aria-valuenow', this.valueNow);
 		this.rootElement.setAttribute('aria-valuetext', this.dolValueNow);
 
-		const position = Math.round((this.valueMax - this.valueNow) * (railRect.height - 2 * (this.thumbHeight - this.railBorderWidth))) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
+		const position = Math.round((this.valueMax - this.valueNow) * (railRect.height - 2 * this.thumbHeight)) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
 
 		if (this.$min) {
 			this.$min.setAttribute('aria-valuemax', this.valueNow);
@@ -185,7 +179,7 @@ class Slider extends EventDispatcher {
 		if (this.$max) {
 			this.$max.setAttribute('aria-valuemin', this.valueNow);
 			this.$rail.setAttribute('data-min', this.valueNow);
-			this.rootElement.style.setProperty('transform', `translate3d( 0, calc( ${position}px + ${this.thumbHeight - this.railBorderWidth}px ), 0 )`);
+			this.rootElement.style.setProperty('transform', `translate3d( 0, calc( ${position}px + ${this.thumbHeight}px ), 0 )`);
 		}
 
 		if (this.$label) {
