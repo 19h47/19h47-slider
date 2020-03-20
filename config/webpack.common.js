@@ -12,7 +12,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-function resolve (dir) {
+function resolve(dir) {
 	return path.join(__dirname, '..', dir)
 }
 
@@ -56,8 +56,8 @@ module.exports = {
 			cleanOnceBeforeBuildPatterns: [resolve('dist'), resolve('docs')],
 		}),
 		new HtmlWebpackPlugin({
-			filename: resolve('docs/index.html' ),
-			template: resolve('index.html' ),
+			filename: resolve('docs/index.html'),
+			template: resolve('index.html'),
 			inject: false,
 		}),
 		new WebpackNotifierPlugin({

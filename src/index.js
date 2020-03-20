@@ -36,8 +36,8 @@ class Slider extends EventDispatcher {
 		this.$rail = this.rootElement.parentNode;
 
 		// this.$label = false;
-		this.$min = false;
-		this.$max = false;
+		this.$min = null;
+		this.$max = null;
 
 		this.valueNow = this.options.valueNow;
 		this.valueText = this.options.valueText;
