@@ -10,7 +10,6 @@ import {
 } from '@19h47/keycode';
 import EventDispatcher from '@/EventDispatcher';
 
-
 const optionsDefault = {
 	valueNow: 50,
 	valueText: 50,
@@ -22,7 +21,6 @@ const optionsDefault = {
 
 const blur = target => target.classList.remove('focus');
 const focus = target => target.classList.add('focus');
-
 
 class Slider extends EventDispatcher {
 	constructor(element, options = {}) {
@@ -51,30 +49,28 @@ class Slider extends EventDispatcher {
 		this.onKeydown = this.onKeydown.bind(this);
 	}
 
-
 	init() {
 		const { previousElementSibling: $previous, nextElementSibling: $next } = this.rootElement;
 
 		if ($next) {
 			this.$min = $next;
-			this.valueMin = parseInt((this.$min.getAttribute('aria-valuemin')), 10);
+			this.valueMin = parseInt(this.$min.getAttribute('aria-valuemin'), 10);
 		} else {
-			this.valueMin = parseInt((this.rootElement.getAttribute('aria-valuemin')), 10);
+			this.valueMin = parseInt(this.rootElement.getAttribute('aria-valuemin'), 10);
 		}
 
 		if ($previous) {
 			this.$max = $previous;
-			this.valueMax = parseInt((this.$max.getAttribute('aria-valuemax')), 10);
+			this.valueMax = parseInt(this.$max.getAttribute('aria-valuemax'), 10);
 		} else {
-			this.valueMax = parseInt((this.rootElement.getAttribute('aria-valuemax')), 10);
+			this.valueMax = parseInt(this.rootElement.getAttribute('aria-valuemax'), 10);
 		}
 
-		this.valueNow = parseInt((this.rootElement.getAttribute('aria-valuenow')), 10);
+		this.valueNow = parseInt(this.rootElement.getAttribute('aria-valuenow'), 10);
 
 		this.initEvents();
 		this.moveSliderTo(this.valueNow);
 	}
-
 
 	initEvents() {
 		this.rootElement.addEventListener('keydown', this.onKeydown);
@@ -84,7 +80,6 @@ class Slider extends EventDispatcher {
 
 		this.rootElement.addEventListener('touchstart', this.drag.bind(this), { passive: false });
 	}
-
 
 	onKeydown(event) {
 		const key = event.keyCode || event.which;
@@ -117,7 +112,9 @@ class Slider extends EventDispatcher {
 		const handleMouseMove = e => {
 			const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - railRect.top; // eslint-disable-line max-len
 
-			this.valueNow = this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / railRect.height, 10); // eslint-disable-line max-len
+			this.valueNow =
+				this.valueMax -
+				parseInt(((this.valueMax - this.valueMin) * diffY) / railRect.height, 10); // eslint-disable-line max-len
 
 			this.moveSliderTo(this.valueNow);
 
@@ -148,7 +145,6 @@ class Slider extends EventDispatcher {
 		this.rootElement.focus();
 	}
 
-
 	moveSliderTo(value) {
 		const valueMax = parseInt(this.rootElement.getAttribute('aria-valuemax'), 10);
 		const valueMin = parseInt(this.rootElement.getAttribute('aria-valuemin'), 10);
@@ -168,7 +164,9 @@ class Slider extends EventDispatcher {
 		this.rootElement.setAttribute('aria-valuenow', this.valueNow);
 		this.rootElement.setAttribute('aria-valuetext', this.dolValueNow);
 
-		const position = Math.round((this.valueMax - this.valueNow) * (railRect.height - 2 * this.thumbHeight)) / (this.valueMax - this.valueMin); // eslint-disable-line max-len
+		const position =
+			Math.round((this.valueMax - this.valueNow) * (railRect.height - 2 * this.thumbHeight)) /
+			(this.valueMax - this.valueMin); // eslint-disable-line max-len
 
 		if (this.$min) {
 			this.$min.setAttribute('aria-valuemax', this.valueNow);
@@ -179,7 +177,10 @@ class Slider extends EventDispatcher {
 		if (this.$max) {
 			this.$max.setAttribute('aria-valuemin', this.valueNow);
 			this.$rail.setAttribute('data-min', this.valueNow);
-			this.rootElement.style.setProperty('transform', `translate3d( 0, calc( ${position}px + ${this.thumbHeight}px ), 0 )`);
+			this.rootElement.style.setProperty(
+				'transform',
+				`translate3d( 0, calc( ${position}px + ${this.thumbHeight}px ), 0 )`,
+			);
 		}
 
 		if (this.$label) {
@@ -199,6 +200,5 @@ class Slider extends EventDispatcher {
 		blur(this.$rail);
 	}
 }
-
 
 export default Slider;
