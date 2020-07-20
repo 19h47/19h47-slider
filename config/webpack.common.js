@@ -1,7 +1,7 @@
 /**
  *
  * @file webpack.common.js
- * @author Jérémy Levron <jeremylevron@19h47.fr> (http://19h47.fr)
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
 
 // Node modules
@@ -13,43 +13,45 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 function resolve(dir) {
-	return path.join(__dirname, '..', dir)
+	return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
 	entry: {
 		dist: resolve('src/index.js'),
-		docs: resolve('src/index.js')
+		docs: resolve('src/index.js'),
 	},
 	resolve: {
 		alias: {
 			'@': resolve('src'),
-		}
+		},
 	},
 	output: {
 		library: 'Slider',
 		libraryTarget: 'umd',
-		filename: '../[name]/main.js'
+		filename: '../[name]/main.js',
 	},
 	devServer: {
 		contentBase: resolve('/'),
 		compress: true,
 		port: 3000,
 		inline: true,
-		disableHostCheck: true
+		disableHostCheck: true,
 	},
 	module: {
-		rules: [{
-			enforce: 'pre',
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'eslint-loader'
-		},
-		{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'babel-loader'
-		}],
+		rules: [
+			{
+				enforce: 'pre',
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'eslint-loader',
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+			},
+		],
 	},
 	plugins: [
 		new CleanWebpackPlugin({
@@ -63,7 +65,7 @@ module.exports = {
 		new WebpackNotifierPlugin({
 			title: 'Webpack',
 			excludeWarnings: true,
-			alwaysNotify: true
+			alwaysNotify: true,
 		}),
 	],
 };
