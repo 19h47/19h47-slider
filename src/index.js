@@ -107,14 +107,13 @@ class Slider extends EventDispatcher {
 	}
 
 	drag(event) {
-		const railRect = this.$rail.getBoundingClientRect();
+		const { top, height } = this.$rail.getBoundingClientRect();
 
 		const handleMouseMove = e => {
-			const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - railRect.top; // eslint-disable-line max-len
+			const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - top; // eslint-disable-line max-len
 
 			this.valueNow =
-				this.valueMax -
-				parseInt(((this.valueMax - this.valueMin) * diffY) / railRect.height, 10); // eslint-disable-line max-len
+				this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / height, 10); // eslint-disable-line max-len
 
 			this.moveSliderTo(this.valueNow);
 
