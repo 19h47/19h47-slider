@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider</title>
+	<title>Slider</title>
+	<link rel="icon" type="image/png" href="level-slider.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <style>
@@ -55,7 +56,7 @@
     <div class="container">
 		<div class="row">
 			<div class="col-12 my-5">
-				<h1>
+				<h1 class="m-0">
 					<a href="https://github.com/19h47/19h47-slider">
 						Slider
 					</a>
@@ -64,80 +65,88 @@
 		</div>
 
 		<div class="row">
-			<div class="col-12 col-md-3 js-slider">
-				<h3>Range<sup class="js-slider-label"></sup></h3>
-				<div class="aria-widget-slider">
-					<div class="rail-label max js-slider-label-max">
-						35
-					</div>
-					<div class="rail">
-						<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max"
-							aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35"
-							aria-label="Hotel Maximum Price" aria-orientation="vertical">
-						<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
-							aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
-							aria-label="Hotel Minimum Price" aria-orientation="vertical">
-					</div>
-					<div class="rail-label min js-slider-label-min">
-						0
+			<div class="col-12 col-md-3">
+				<div class="border p-3 js-slider">
+					<h3>Range<sup class="js-slider-label"></sup></h3>
+					<div class="aria-widget-slider">
+						<div class="rail-label max js-slider-label-max">
+							35
+						</div>
+						<div class="rail">
+							<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max"
+								aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35"
+								aria-label="Hotel Maximum Price" aria-orientation="vertical">
+							<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
+								aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
+								aria-label="Hotel Minimum Price" aria-orientation="vertical">
+						</div>
+						<div class="rail-label min js-slider-label-min">
+							0
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-3 js-slider">
-				<h3>Range<sup class="js-slider-label"></sup></h3>
-				<div class="aria-widget-slider">
-					<div class="rail-label max js-slider-label-max">
-						803
-					</div>
-					<div class="rail">
-						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="10"
-							aria-valuenow="803" aria-valuetext="803" aria-valuemax="1000" aria-label="Hotel Maximum Price"
-							aria-orientation="vertical">
-							<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
-								aria-valuemin="10" aria-valuenow="56" aria-valuetext="0" aria-valuemax="1000"
-								aria-label="Hotel Minimum Price" aria-orientation="vertical">
-					</div>
-					<div class="rail-label min js-slider-label-min">
-						56
+			<div class="col-12 col-md-3">
+				<div class="border p-3 js-slider">
+					<h3>Range<sup class="js-slider-label"></sup></h3>
+					<div class="aria-widget-slider">
+						<div class="rail-label max js-slider-label-max">
+							803
+						</div>
+						<div class="rail">
+							<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="10"
+								aria-valuenow="803" aria-valuetext="803" aria-valuemax="1000" aria-label="Hotel Maximum Price"
+								aria-orientation="vertical">
+								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
+									aria-valuemin="10" aria-valuenow="56" aria-valuetext="0" aria-valuemax="1000"
+									aria-label="Hotel Minimum Price" aria-orientation="vertical">
+						</div>
+						<div class="rail-label min js-slider-label-min">
+							56
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-12 col-md-3 js-slider">
-				<h3>Range<sup class="js-slider-label"></sup></h3>
-				<div class="aria-widget-slider">
-					<div class="rail-label max js-slider-label-max">
-						35
-					</div>
-					<div class="rail">
-						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max"
-							aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35"
-							aria-label="Hotel Maximum Price" aria-orientation="vertical">
-							<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
-								aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
-								aria-label="Hotel Minimum Price" aria-orientation="vertical">
-					</div>
-					<div class="rail-label min js-slider-label-min">
-						0
+			<div class="col-12 col-md-3">
+				<div class="border p-3 js-slider">
+					<h3>Range<sup class="js-slider-label"></sup></h3>
+					<div class="aria-widget-slider">
+						<div class="rail-label max js-slider-label-max">
+							35
+						</div>
+						<div class="rail">
+							<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max"
+								aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35"
+								aria-label="Hotel Maximum Price" aria-orientation="vertical">
+								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
+									aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35"
+									aria-label="Hotel Minimum Price" aria-orientation="vertical">
+						</div>
+						<div class="rail-label min js-slider-label-min">
+							0
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-3 js-slider">
-				<h3>Range<sup class="js-slider-label"></sup></h3>
-				<div class="aria-widget-slider">
-					<div class="rail-label max js-slider-label-max">
-						10000
-					</div>
-					<div class="rail">
-						<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max"
-							aria-valuemin="0" aria-valuenow="10000" aria-valuetext="10000" aria-valuemax="10000"
-							aria-label="Hotel Maximum Price" aria-orientation="vertical">
-							<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
-								aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="10000"
-								aria-label="Hotel Minimum Price" aria-orientation="vertical">
-					</div>
-					<div class="rail-label min js-slider-label-min">
-						0
+			<div class="col-12 col-md-3">
+				<div class="border p-3 js-slider">
+					<h3>Range<sup class="js-slider-label"></sup></h3>
+					<div class="aria-widget-slider">
+						<div class="rail-label max js-slider-label-max">
+							10000
+						</div>
+						<div class="rail">
+							<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max"
+								aria-valuemin="0" aria-valuenow="10000" aria-valuetext="10000" aria-valuemax="10000"
+								aria-label="Hotel Maximum Price" aria-orientation="vertical">
+								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min"
+									aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="10000"
+									aria-label="Hotel Minimum Price" aria-orientation="vertical">
+						</div>
+						<div class="rail-label min js-slider-label-min">
+							0
+						</div>
 					</div>
 				</div>
 			</div>
