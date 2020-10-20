@@ -8,7 +8,7 @@ import {
 	HOME,
 	END,
 } from '@19h47/keycode';
-import EventDispatcher from '@/EventDispatcher';
+import { EventEmitter } from 'events';
 
 const optionsDefault = {
 	valueNow: 50,
@@ -22,9 +22,9 @@ const optionsDefault = {
 const blur = target => target.classList.remove('focus');
 const focus = target => target.classList.add('focus');
 
-class Slider extends EventDispatcher {
+class Slider extends EventEmitter {
 	constructor(element, options = {}) {
-		super(['Slider.change']);
+		super();
 
 		this.rootElement = element;
 
