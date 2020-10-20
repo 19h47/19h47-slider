@@ -1,12 +1,12 @@
 {
 	"name": "@19h47/slider",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Slider",
 	"main": "dist/main.js",
 	"scripts": {
 		"prod": "webpack --mode=production --config webpack/webpack.config.js",
 		"dev": "webpack --mode=development --config webpack/webpack.config.js",
-		"deploy": "yarn login && yarn prod && yarn publish",
+		"deploy": "yarn login && yarn prod && npm publish",
 		"start": "webpack-dev-server --mode=development --hot --config webpack/webpack.config.js"
 	},
 	"repository": {
