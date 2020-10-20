@@ -4,8 +4,12 @@
 
 ```javascript
 
-import @19h47/slider
+import Slider from @19h47/slider
 
+const $slider = document.querySelector('[role=slider]')];
+const slider = new Slider($slider);
+
+thumb.init();
 ```
 
 ## Keyboard Support
@@ -21,6 +25,26 @@ import @19h47/slider
 | Home        | Sets slider to its minimum value.                                          |
 | End         | Sets slider to its maximum value.                                          |
 
+## Event
+
+| Event | Arguments | Description  |
+| ----- | --------- | ------------ |
+| Slider.change | event | Object containing __now__ value. |
+
+```javascript
+
+import Slider from @19h47/slider
+
+const $slider = document.querySelector('[role=slider]')];
+const slider = new Slider($slider);
+
+thumb.init();
+
+thumb.on('Slider.change', ({ now ) => {
+		console.log(now);
+});
+
+```
 ## Acknowledgments
 
 - [Multithumb slider](https://www.w3.org/TR/wai-aria-practices/examples/slider/multithumb-slider.html)
