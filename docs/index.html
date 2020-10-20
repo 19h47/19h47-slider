@@ -148,12 +148,13 @@
 			const $labelMin = $slider.querySelector('.js-slider-label-min');
 			const $labelMax = $slider.querySelector('.js-slider-label-max');
 
-			thumbs.map($thumb => {
+			thumbs.forEach($thumb => {
 				const thumb = new Slider.default($thumb);
 				thumb.init();
 
-				thumb.on('Slider.change', () => {
+				thumb.on('Slider.change', ({ now }) => {
 					const { max, min } = $thumb.parentElement.dataset;
+					console.log(now);
 
 					$label.innerHTML = min + ' &rarr; ' + max;
 					$labelMin.innerHTML = min;
