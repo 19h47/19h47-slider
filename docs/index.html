@@ -1,169 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Slider</title>
+		<link rel="icon" type="image/png" href="level-slider.png">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Slider</title>
-	<link rel="icon" type="image/png" href="level-slider.png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<style>
+			/* CSS Document */
 
-    <style>
-        /* CSS Document */
+			div.aria-widget-slider {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 24px;
+				height: 233px;
+			}
 
-		div.aria-widget-slider {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 24px;
-			height: 233px;
-		}
+			div.rail {
+				flex: 1;
+			}
 
-		div.rail {
-			flex: 1;
-		}
+			div.rail-label {
+				text-align: center;
+				height: 24px;
+				width: 4em;
+			}
 
-		div.rail-label {
-			text-align: center;
-			height: 24px;
-			width: 4em;
-		}
+			div.aria-widget-slider .rail {
+				background-color: #eee;
+				border: 1px solid #888;
+				position: relative;
+				height: 4px;
+			}
 
-		div.aria-widget-slider .rail {
-			background-color: #eee;
-			border: 1px solid #888;
-			position: relative;
-			height: 4px;
-		}
+			div.aria-widget-slider button[role='slider'] {
+				border: none;
+				position: absolute;
+				padding: 0;
+				margin: 0;
+				width: 24px;
+				height: 24px;
+				right: -12px;
+			}
 
-		div.aria-widget-slider button[role="slider"] {
-			border: none;
-			position: absolute;
-			padding: 0;
-			margin: 0;
-			width: 24px;
-			height: 24px;
-			right: -12px;
-		}
+			div.aria-widget-slider .rail.focus {
+				background-color: #aaa;
+			}
+		</style>
+	</head>
 
-		div.aria-widget-slider .rail.focus {
-			background-color: #aaa;
-		}
-    </style>
-</head>
-
-<body>
-    <div class="container">
-		<div class="row">
-			<div class="col-12 my-5">
-				<h1 class="m-0">
-					<a href="https://github.com/19h47/19h47-slider">
-						Slider
-					</a>
-				</h1>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-12 col-md-3">
-				<div class="border p-3 js-slider">
-					<h3>Range<sup class="js-slider-label"></sup></h3>
-					<div class="aria-widget-slider">
-						<div class="rail-label max js-slider-label-max">
-							35
-						</div>
-						<div class="rail">
-							<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35" aria-label="Hotel Maximum Price" aria-orientation="vertical">
-							<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35" aria-label="Hotel Minimum Price" aria-orientation="vertical">
-						</button></button></div>
-						<div class="rail-label min js-slider-label-min">
-							0
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-3">
-				<div class="border p-3 js-slider">
-					<h3>Range<sup class="js-slider-label"></sup></h3>
-					<div class="aria-widget-slider">
-						<div class="rail-label max js-slider-label-max">
-							803
-						</div>
-						<div class="rail">
-							<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="10" aria-valuenow="803" aria-valuetext="803" aria-valuemax="1000" aria-label="Hotel Maximum Price" aria-orientation="vertical">
-								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="10" aria-valuenow="56" aria-valuetext="0" aria-valuemax="1000" aria-label="Hotel Minimum Price" aria-orientation="vertical">
-						</button></button></div>
-						<div class="rail-label min js-slider-label-min">
-							56
-						</div>
-					</div>
+	<body>
+		<div class="container">
+			<div class="row my-5">
+				<div class="col-12">
+					<h1 class="m-0">
+						<a href="https://github.com/19h47/19h47-slider"> Slider </a>
+					</h1>
 				</div>
 			</div>
 
-			<div class="col-12 col-md-3">
-				<div class="border p-3 js-slider">
-					<h3>Range<sup class="js-slider-label"></sup></h3>
-					<div class="aria-widget-slider">
-						<div class="rail-label max js-slider-label-max">
-							35
-						</div>
-						<div class="rail">
-							<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35" aria-label="Hotel Maximum Price" aria-orientation="vertical">
-								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35" aria-label="Hotel Minimum Price" aria-orientation="vertical">
-						</button></button></div>
-						<div class="rail-label min js-slider-label-min">
-							0
+			<div class="row my-5">
+				<div class="col-12">
+					<pre class="p-3 mb-0 mt-3"><code class="language-javascript">import Slider from @19h47/slider
+
+const $slider = document.querySelector('[role=slider]');
+const slider = new Slider($slider);
+
+slider.init();</code></pre>
+				</div>
+			</div>
+
+			<div class="row my-5">
+				<div class="col-12 col-md-3">
+					<div class="border p-3 js-slider">
+						<h2 class="h3">Range<sup class="js-slider-label"></sup></h2>
+						<div class="aria-widget-slider">
+							<div class="rail-label max js-slider-label-max">35</div>
+							<div class="rail">
+								<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35" aria-label="Hotel Maximum Price" aria-orientation="vertical"></button>
+								<button type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35" aria-label="Hotel Minimum Price" aria-orientation="vertical"></button>
+							</div>
+							<div class="rail-label min js-slider-label-min">0</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-12 col-md-3">
-				<div class="border p-3 js-slider">
-					<h3>Range<sup class="js-slider-label"></sup></h3>
-					<div class="aria-widget-slider">
-						<div class="rail-label max js-slider-label-max">
-							10000
+				<div class="col-12 col-md-3">
+					<div class="border p-3 js-slider">
+						<h2 class="h3">Range<sup class="js-slider-label"></sup></h2>
+						<div class="aria-widget-slider">
+							<div class="rail-label max js-slider-label-max">803</div>
+							<div class="rail">
+								<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="10" aria-valuenow="803" aria-valuetext="803" aria-valuemax="1000" aria-label="Hotel Maximum Price" aria-orientation="vertical"></button>
+								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="10" aria-valuenow="56" aria-valuetext="0" aria-valuemax="1000" aria-label="Hotel Minimum Price" aria-orientation="vertical"></button>
+							</div>
+							<div class="rail-label min js-slider-label-min">56</div>
 						</div>
-						<div class="rail">
-							<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="0" aria-valuenow="10000" aria-valuetext="10000" aria-valuemax="10000" aria-label="Hotel Maximum Price" aria-orientation="vertical">
-								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="10000" aria-label="Hotel Minimum Price" aria-orientation="vertical">
-						</button></button></div>
-						<div class="rail-label min js-slider-label-min">
-							0
+					</div>
+				</div>
+
+				<div class="col-12 col-md-3">
+					<div class="border p-3 js-slider">
+						<h2 class="h3">Range<sup class="js-slider-label"></sup></h2>
+						<div class="aria-widget-slider">
+							<div class="rail-label max js-slider-label-max">35</div>
+							<div class="rail">
+								<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="0" aria-valuenow="35" aria-valuetext="35" aria-valuemax="35" aria-label="Hotel Maximum Price" aria-orientation="vertical"></button>
+								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="35" aria-label="Hotel Minimum Price" aria-orientation="vertical"></button>
+							</div>
+							<div class="rail-label min js-slider-label-min">0</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3">
+					<div class="border p-3 js-slider">
+						<h2 class="h3">Range<sup class="js-slider-label"></sup></h2>
+						<div class="aria-widget-slider">
+							<div class="rail-label max js-slider-label-max">10000</div>
+							<div class="rail">
+								<button id="maxPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary max thumb js-max" aria-valuemin="0" aria-valuenow="10000" aria-valuetext="10000" aria-valuemax="10000" aria-label="Hotel Maximum Price" aria-orientation="vertical"></button>
+								<button id="minPriceHotel" type="button" role="slider" tabindex="0" class="rounded-circle btn btn-secondary min thumb js-min" aria-valuemin="0" aria-valuenow="0" aria-valuetext="0" aria-valuemax="10000" aria-label="Hotel Minimum Price" aria-orientation="vertical"></button>
+							</div>
+							<div class="rail-label min js-slider-label-min">0</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-    </div>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+		<script src="./main.js"></script>
+		<script>
+			const sliders = [...document.querySelectorAll('.js-slider')];
 
-    <script type="text/javascript" src="./main.js"></script>
-    <script>
-		const sliders = [...document.querySelectorAll('.js-slider')];
+			sliders.forEach($slider => {
+				const thumbs = [...$slider.querySelectorAll('[role=slider]')];
+				const $label = $slider.querySelector('.js-slider-label');
+				const $labelMin = $slider.querySelector('.js-slider-label-min');
+				const $labelMax = $slider.querySelector('.js-slider-label-max');
 
-		sliders.map($slider => {
-			const thumbs = [...$slider.querySelectorAll('[role=slider]')];
-			const $label = $slider.querySelector('.js-slider-label');
-			const $labelMin = $slider.querySelector('.js-slider-label-min');
-			const $labelMax = $slider.querySelector('.js-slider-label-max');
+				thumbs.forEach($thumb => {
+					const thumb = new Slider.default($thumb);
+					thumb.init();
 
-			thumbs.forEach($thumb => {
-				const thumb = new Slider.default($thumb);
-				thumb.init();
+					thumb.on('Slider.change', ({ now }) => {
+						const { max, min } = $thumb.parentElement.dataset;
+						console.log(now);
 
-				thumb.on('Slider.change', ({ now }) => {
-					const { max, min } = $thumb.parentElement.dataset;
-					console.log(now);
-
-					$label.innerHTML = min + ' &rarr; ' + max;
-					$labelMin.innerHTML = min;
-					$labelMax.innerHTML = max;
-				})
+						$label.innerHTML = min + ' &rarr; ' + max;
+						$labelMin.innerHTML = min;
+						$labelMax.innerHTML = max;
+					});
+				});
 			});
-		});
-
-    </script>
-</body>
-
+		</script>
+	</body>
 </html>

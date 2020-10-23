@@ -9,7 +9,7 @@ import Slider from @19h47/slider
 const $slider = document.querySelector('[role=slider]');
 const slider = new Slider($slider);
 
-thumb.init();
+slider.init();
 ```
 
 ## Keyboard Support
@@ -38,9 +38,9 @@ import Slider from @19h47/slider
 const $slider = document.querySelector('[role=slider]');
 const slider = new Slider($slider);
 
-thumb.init();
+slider.init();
 
-thumb.on('Slider.change', ({ now ) => {
+slider.on('Slider.change', ({ now ) => {
 	console.log(now);
 });
 

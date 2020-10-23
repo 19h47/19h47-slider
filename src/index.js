@@ -46,7 +46,9 @@ class Slider extends EventEmitter {
 		this.thumbHeight = this.options.thumbHeight;
 
 		// Bind
-		this.onKeydown = this.onKeydown.bind(this);
+		this.handleKeydown = this.handleKeydown.bind(this);
+		this.handleFocus = this.handleFocus.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
 	}
 
 	init() {
@@ -73,15 +75,15 @@ class Slider extends EventEmitter {
 	}
 
 	initEvents() {
-		this.rootElement.addEventListener('keydown', this.onKeydown);
+		this.rootElement.addEventListener('keydown', this.handleKeydown);
 		this.rootElement.addEventListener('mousedown', this.drag.bind(this));
-		this.rootElement.addEventListener('focus', this.handleFocus.bind(this));
-		this.rootElement.addEventListener('blur', this.handleBlur.bind(this));
+		this.rootElement.addEventListener('focus', this.handleFocus);
+		this.rootElement.addEventListener('blur', this.handleBlur);
 
 		this.rootElement.addEventListener('touchstart', this.drag.bind(this), { passive: false });
 	}
 
-	onKeydown(event) {
+	handleKeydown(event) {
 		const key = event.keyCode || event.which;
 
 		const move = value => {
