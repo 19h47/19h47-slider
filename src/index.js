@@ -49,6 +49,10 @@ class Slider extends EventEmitter {
 		this.handleKeydown = this.handleKeydown.bind(this);
 		this.handleFocus = this.handleFocus.bind(this);
 		this.handleBlur = this.handleBlur.bind(this);
+		this.handlePointerup = this.handlePointerup.bind(this);
+		this.handlePointerdown = this.handlePointerdown.bind(this);
+
+		this.drag = this.drag.bind(this);
 	}
 
 	init() {
@@ -76,11 +80,33 @@ class Slider extends EventEmitter {
 
 	initEvents() {
 		this.rootElement.addEventListener('keydown', this.handleKeydown);
-		this.rootElement.addEventListener('mousedown', this.drag.bind(this));
+		// this.rootElement.addEventListener('mousedown', this.drag.bind(this));
 		this.rootElement.addEventListener('focus', this.handleFocus);
 		this.rootElement.addEventListener('blur', this.handleBlur);
 
-		this.rootElement.addEventListener('touchstart', this.drag.bind(this), { passive: false });
+		// this.rootElement.addEventListener('touchstart', this.drag.bind(this), { passive: false });
+
+		this.rootElement.addEventListener('pointerdown', this.handlePointerdown);
+		this.rootElement.addEventListener('pointerup', this.handlePointerup);
+	}
+
+	handlePointerdown(event) {
+		this.rootElement.addEventListener('pointermove', this.drag);
+		this.rootElement.setPointerCapture(event.pointerId);
+	}
+
+	handlePointerup(event) {
+		this.rootElement.removeEventListener('pointermove', this.drag);
+		this.rootElement.releasePointerCapture(event.pointerId);
+	}
+
+	drag(event) {
+		const { top, height } = this.$rail.getBoundingClientRect();
+		const diffY = event.touches ? event.touches[0].clientY - top : event.clientY - top;
+
+		this.valueNow = this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / height, 10); // eslint-disable-line max-len
+
+		this.moveSliderTo(this.valueNow);
 	}
 
 	handleKeydown(event) {
@@ -108,43 +134,43 @@ class Slider extends EventEmitter {
 		return (codes[key] || codes.default)();
 	}
 
-	drag(event) {
-		const { top, height } = this.$rail.getBoundingClientRect();
+	// drag(event) {
+	// 	const { top, height } = this.$rail.getBoundingClientRect();
 
-		const handleMouseMove = e => {
-			const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - top; // eslint-disable-line max-len
+	// 	const handleMouseMove = e => {
+	// 		const diffY = (e.touches ? e.touches[0].clientY : e.clientY) - top; // eslint-disable-line max-len
 
-			this.valueNow =
-				this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / height, 10); // eslint-disable-line max-len
+	// 		this.valueNow =
+	// 			this.valueMax - parseInt(((this.valueMax - this.valueMin) * diffY) / height, 10); // eslint-disable-line max-len
 
-			this.moveSliderTo(this.valueNow);
+	// 		this.moveSliderTo(this.valueNow);
 
-			if (!e.touches) {
-				e.preventDefault();
-				e.stopPropagation();
-			}
-		};
+	// 		if (!e.touches) {
+	// 			e.preventDefault();
+	// 			e.stopPropagation();
+	// 		}
+	// 	};
 
-		const handleMouseUp = () => {
-			document.removeEventListener('mousemove', handleMouseMove);
-			document.removeEventListener('mouseup', handleMouseUp);
+	// 	const handleMouseUp = () => {
+	// 		document.removeEventListener('mousemove', handleMouseMove);
+	// 		document.removeEventListener('mouseup', handleMouseUp);
 
-			document.removeEventListener('touchmove', handleMouseMove, { passive: true });
-			document.removeEventListener('touchend', handleMouseUp, { passive: true });
-		};
+	// 		document.removeEventListener('touchmove', handleMouseMove, { passive: true });
+	// 		document.removeEventListener('touchend', handleMouseUp, { passive: true });
+	// 	};
 
-		document.addEventListener('mousemove', handleMouseMove);
-		document.addEventListener('mouseup', handleMouseUp);
+	// 	document.addEventListener('mousemove', handleMouseMove);
+	// 	document.addEventListener('mouseup', handleMouseUp);
 
-		document.addEventListener('touchmove', handleMouseMove, false);
-		document.addEventListener('touchend', handleMouseUp, false);
+	// 	document.addEventListener('touchmove', handleMouseMove, false);
+	// 	document.addEventListener('touchend', handleMouseUp, false);
 
-		event.preventDefault();
-		event.stopPropagation();
+	// 	event.preventDefault();
+	// 	event.stopPropagation();
 
-		// Set focus to the clicked handle
-		this.rootElement.focus();
-	}
+	// 	// Set focus to the clicked handle
+	// 	this.rootElement.focus();
+	// }
 
 	moveSliderTo(value) {
 		const valueMax = parseInt(this.rootElement.getAttribute('aria-valuemax'), 10);
