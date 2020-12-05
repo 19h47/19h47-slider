@@ -91,6 +91,8 @@ class Slider extends EventEmitter {
 	}
 
 	handlePointerdown(event) {
+		console.info('Slider.handlePointerdown');
+
 		this.rootElement.addEventListener('pointermove', this.drag);
 		this.rootElement.setPointerCapture(event.pointerId);
 	}
@@ -101,6 +103,8 @@ class Slider extends EventEmitter {
 	}
 
 	drag(event) {
+		// console.info('Slider.drag');
+
 		const { top, height } = this.$rail.getBoundingClientRect();
 		const diffY = event.touches ? event.touches[0].clientY - top : event.clientY - top;
 
