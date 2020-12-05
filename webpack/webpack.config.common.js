@@ -1,10 +1,10 @@
 /**
+ * Common
  *
  * @file webpack.config.common.js
- * @author Jérémy Levron <jeremylevron@19h47.fr> (http://19h47.fr)
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
 
-// Plugins
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
@@ -22,12 +22,13 @@ module.exports = {
 		filename: '../[name]/main.js',
 	},
 	devServer: {
-		contentBase: resolve('/'),
+		static: [
+			resolve('/')
+		],
 		compress: true,
 		port: 3000,
-		inline: true,
-		disableHostCheck: true,
-		writeToDisk: true,
+		firewall: true,
+		// writeToDisk: true,
 	},
 	resolve: {
 		alias: {
