@@ -1,6 +1,6 @@
 {
 	"name": "@19h47/slider",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Slider",
 	"type": "module",
 	"main": "dist/slider.umd.cjs",

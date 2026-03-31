@@ -128,6 +128,12 @@ rail.addEventListener('Slider.change', (event) => {
 })
 ```
 
+## Utilities
+
+If you need to draw UI based on geometry (range bar, tooltips), you can use:
+
+- `slider.rect()`: returns a `DOMRect` snapshot for the rail
+
 ## Keyboard support
 
 | Key         | Function                                                                   |

@@ -90,12 +90,16 @@ export default class Slider {
 		return getComputedStyle(this.$rail).direction === "rtl";
 	}
 
-	private get railRect() {
+	/**
+	 * Returns a snapshot of the rail bounding rect.
+	 */
+	rect() {
 		return this.$rail.getBoundingClientRect();
 	}
 
-	private get railLength() {
-		return this.horizontal ? this.railRect.width : this.railRect.height;
+	private get length() {
+		const { width, height } = this.rect();
+		return this.horizontal ? width : height;
 	}
 
 	private get size() {
@@ -103,7 +107,7 @@ export default class Slider {
 	}
 
 	private get track() {
-		return Math.max(0, this.railLength - 2 * this.size);
+		return Math.max(0, this.length - 2 * this.size);
 	}
 
 	private get state() {
@@ -155,7 +159,7 @@ export default class Slider {
 		document.removeEventListener("pointerup", this.handlePointerup);
 	}
 
-	private update(minimum: number, maximum: number, active: "min" | "max" = this.active) {
+	update(minimum: number, maximum: number, active: "min" | "max" = this.active) {
 		const { min: gmin, max: gmax } = this.state;
 
 		let min = clamp(minimum, gmin, gmax);
@@ -240,7 +244,7 @@ export default class Slider {
 	}
 
 	private value(event: PointerEvent, which: "min" | "max"): number {
-		const { left, top } = this.railRect;
+		const { left, top } = this.rect();
 		const coordinate = this.horizontal ? event.clientX : event.clientY;
 		const start = this.horizontal ? left : top;
 		const offset = this.offset(which);
