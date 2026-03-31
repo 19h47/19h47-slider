@@ -16,6 +16,9 @@ npm i @19h47/slider
 
 The controller expects a **rail element** that contains **exactly 2 thumbs** with `role="slider"`.
 
+The library is HTML-first for ARIA attributes (it does not set `aria-orientation` at runtime),
+but its internal `orientation` is determined by the JS option.
+
 **Important:** thumbs order matters (matches APG):
 - **first thumb** = **max**
 - **second thumb** = **min**
@@ -83,14 +86,18 @@ type Options = {
   width: number
   height: number
   direction: 'auto' | 'ltr' | 'rtl'
+  step: number
+  page: number
 }
 ```
 
 Defaults:
-- `orientation`: `'vertical'`
+- `orientation`: `'horizontal'`
 - `width`: `24`
 - `height`: `24`
 - `direction`: `'auto'` (reads `getComputedStyle(rail).direction`)
+- `step`: `1`
+- `page`: `10`
 
 Notes:
 - This implementation keeps the thumbs **always visible** by applying a constant 1-thumb offset (vertical: min thumb; horizontal: max thumb), matching the original library approach.
@@ -105,7 +112,7 @@ The controller dispatches a DOM event on the **rail**:
 - **detail**:
 
 ```ts
-type SliderChangeDetail = {
+type Detail = {
   min: number
   max: number
   active: 'min' | 'max'
@@ -129,8 +136,8 @@ rail.addEventListener('Slider.change', (event) => {
 | Up Arrow    | Increases slider value one step.                                           |
 | Left Arrow  | Decreases slider value one step.                                           |
 | Down Arrow  | Decreases slider value one step.                                           |
-| Page Up     | Increases slider value multiple steps.<br>In this slider, jumps ten steps. |
-| Page Down   | Decreases slider value multiple steps.<br>In this slider, jumps ten steps. |
+| Page Up     | Increases slider value by `page`.                                          |
+| Page Down   | Decreases slider value by `page`.                                          |
 | Home        | Sets slider to its minimum value.                                          |
 | End         | Sets slider to its maximum value.                                          |
 

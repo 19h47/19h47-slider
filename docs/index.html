@@ -222,7 +222,7 @@ slider.init()</code></pre>
 										<tr>
 											<td><code>orientation</code></td>
 											<td><code>'horizontal' | 'vertical'</code></td>
-											<td><code>'vertical'</code></td>
+											<td><code>'horizontal'</code></td>
 											<td>Slider orientation.</td>
 										</tr>
 										<tr>
@@ -275,7 +275,7 @@ slider.init()</code></pre>
 										<h3 class="h5 mb-3">Horizontal range <sup class="js-slider-label"></sup></h3>
 										<div class="aria-widget-slider horizontal">
 											<div class="rail-label max js-slider-label-max">35</div>
-											<div class="rail">
+											<div class="rail" role="group" aria-label="Price range">
 												<button
 													type="button"
 													role="slider"
@@ -313,7 +313,7 @@ slider.init()</code></pre>
 										<h3 class="h5 mb-3">Horizontal range (RTL) <sup class="js-slider-label"></sup></h3>
 										<div class="aria-widget-slider horizontal">
 											<div class="rail-label max js-slider-label-max">35</div>
-											<div class="rail">
+											<div class="rail" role="group" aria-label="Price range">
 												<button
 													type="button"
 													role="slider"
@@ -351,7 +351,7 @@ slider.init()</code></pre>
 										<h3 class="h6 mb-3">Vertical (0 → 35) <sup class="js-slider-label"></sup></h3>
 										<div class="aria-widget-slider">
 											<div class="rail-label max js-slider-label-max">35</div>
-											<div class="rail">
+											<div class="rail" role="group" aria-label="Price range">
 												<button
 													type="button"
 													role="slider"
@@ -389,7 +389,7 @@ slider.init()</code></pre>
 										<h3 class="h6 mb-3">Vertical (10 → 1000) <sup class="js-slider-label"></sup></h3>
 										<div class="aria-widget-slider">
 											<div class="rail-label max js-slider-label-max">803</div>
-											<div class="rail">
+											<div class="rail" role="group" aria-label="Price range">
 												<button
 													type="button"
 													role="slider"
@@ -427,7 +427,7 @@ slider.init()</code></pre>
 										<h3 class="h6 mb-3">Vertical (0 → 35) <sup class="js-slider-label"></sup></h3>
 										<div class="aria-widget-slider">
 											<div class="rail-label max js-slider-label-max">35</div>
-											<div class="rail">
+											<div class="rail" role="group" aria-label="Price range">
 												<button
 													type="button"
 													role="slider"
@@ -465,7 +465,7 @@ slider.init()</code></pre>
 										<h3 class="h6 mb-3">Vertical (0 → 10000) <sup class="js-slider-label"></sup></h3>
 										<div class="aria-widget-slider">
 											<div class="rail-label max js-slider-label-max">10000</div>
-											<div class="rail">
+											<div class="rail" role="group" aria-label="Price range">
 												<button
 													type="button"
 													role="slider"
@@ -513,7 +513,7 @@ slider.init()</code></pre>
 
 			const sliders = [...document.querySelectorAll(".js-slider")];
 			sliders.forEach(($slider) => {
-				const orientation = $slider.dataset.orientation || "vertical";
+				const orientation = $slider.dataset.orientation || "horizontal";
 				const $rail = $slider.querySelector(".rail");
 				const $label = $slider.querySelector(".js-slider-label");
 				const $labelMin = $slider.querySelector(".js-slider-label-min");

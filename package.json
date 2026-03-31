@@ -1,13 +1,25 @@
 {
 	"name": "@19h47/slider",
-	"version": "1.0.2",
+	"version": "2.0.0",
 	"description": "Slider",
 	"type": "module",
 	"main": "dist/slider.umd.cjs",
 	"module": "dist/slider.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/slider.js",
+			"require": "./dist/slider.umd.cjs"
+		}
+	},
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build",
+		"build:types": "tsc -p tsconfig.build.json",
+		"build": "vite build && pnpm run build:types",
 		"deploy": "npm login && npm run build && npm publish"
 	},
 	"repository": {
@@ -26,6 +38,7 @@
 	},
 	"homepage": "https://github.com/19h47/19h47-slider#readme",
 	"devDependencies": {
+		"typescript": "^5.9.2",
 		"vite": "^6.3.4"
 	}
 }
