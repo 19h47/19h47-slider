@@ -80,6 +80,7 @@ slider.destroy()
 
 ```ts
 type Orientation = 'horizontal' | 'vertical'
+type Direction = "auto" | "ltr" | "rtl";
 
 type Options = {
   orientation: Orientation
