@@ -513,7 +513,11 @@ slider.init()</code></pre>
 
 			const sliders = [...document.querySelectorAll(".js-slider")];
 			sliders.forEach(($slider) => {
-				const orientation = $slider.dataset.orientation || "horizontal";
+				const orientation =
+					$slider.dataset.orientation ||
+					($slider.querySelector(".aria-widget-slider")?.classList.contains("horizontal")
+						? "horizontal"
+						: "vertical");
 				const $rail = $slider.querySelector(".rail");
 				const $label = $slider.querySelector(".js-slider-label");
 				const $labelMin = $slider.querySelector(".js-slider-label-min");

@@ -45,9 +45,9 @@ class w {
     }, this.handleBlur = (i) => {
       const t = i.currentTarget;
       x(t), x(this.$rail);
-    }, this.$rail = e;
+    };
     const r = { ...$, ...s };
-    this.orientation = r.orientation, this.width = r.width, this.height = r.height, this.direction = r.direction, this.step = r.step, this.page = r.page;
+    this.$rail = e, this.orientation = r.orientation, this.width = r.width, this.height = r.height, this.direction = r.direction, this.step = r.step, this.page = r.page;
     const a = [...this.$rail.querySelectorAll('[role="slider"]')];
     if (a.length < 2)
       throw new Error("Slider: expected 2 thumbs inside rail");

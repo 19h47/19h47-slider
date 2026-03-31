@@ -55,8 +55,9 @@ export default class Slider {
 	private moving: "min" | "max" | null = null;
 
 	constructor(rail: HTMLElement, options: Partial<Options> = {}) {
-		this.$rail = rail;
 		const opts = { ...defaults, ...options };
+
+		this.$rail = rail;
 		this.orientation = opts.orientation;
 		this.width = opts.width;
 		this.height = opts.height;
